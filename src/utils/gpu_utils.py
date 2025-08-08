@@ -5,7 +5,6 @@ import torchvision.transforms as T
 from PIL import Image
 import io
 
-
 # from torchvision.io import decode_jpeg, decode_png, encode_jpeg, encode_png
 from viam.media.utils.pil import pil_to_viam_image
 

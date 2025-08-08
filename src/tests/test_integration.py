@@ -41,7 +41,7 @@ def get_config(config_dict: Dict, name: str) -> ComponentConfig:
     return config
 
 
-def get_transform_service(config_dict: Dict, reconfigure=True):
+def get_transform_component(config_dict: Dict, reconfigure=True):
     service = GPUTransformCamera("test")
     cam = FakeCamera(CAMERA_NAME, img_path=IMG_PATH, use_ring_buffer=True)
     camera_name = cam.get_resource_name(CAMERA_NAME)  # returns as ResourceName type
@@ -56,7 +56,7 @@ class TestGPUTransformCamera:
     @pytest_asyncio.fixture(autouse=True)
     async def setup_service(self):
         """Setup the transform camera service for testing"""
-        self.service = get_transform_service(WORKING_CONFIG_DICT, reconfigure=True)
+        self.service = get_transform_component(WORKING_CONFIG_DICT, reconfigure=True)
         yield
         # Clean up after tests
         await self.service.close()
@@ -144,7 +144,7 @@ class TestGPUTransformCamera:
             "pipeline": [{"type": "invalid_transform", "attributes": {}}],
         }
         with pytest.raises(ValueError, match="Unknown transform"):
-            get_transform_service(bad_config)
+            get_transform_component(bad_config)
 
     def test_missing_transform_attributes(self):
         """Test that missing required attributes raise errors"""
@@ -155,7 +155,7 @@ class TestGPUTransformCamera:
             ],  # Missing width_px, height_px
         }
         with pytest.raises(KeyError):
-            get_transform_service(bad_config)
+            get_transform_component(bad_config)
 
     @pytest.mark.asyncio
     async def test_pipeline_with_multiple_transforms(self):
@@ -167,7 +167,7 @@ class TestGPUTransformCamera:
                 {"type": "grayscale", "attributes": {}},
             ],
         }
-        service = get_transform_service(multi_transform_config)
+        service = get_transform_component(multi_transform_config)
         try:
             image = await service.get_image()
             assert image is not None

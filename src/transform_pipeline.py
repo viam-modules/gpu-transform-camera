@@ -10,7 +10,7 @@ logger = getLogger(__name__)
 
 
 # classes to use functional transform as align with current transform registry on viam
-class FunctionalCrop(torch.nn.Module):
+class TransformCrop(torch.nn.Module):
     def __init__(
         self, x_min_px, y_min_px, x_max_px, y_max_px, overlay_crop_box=False
     ):  # store overlay_crop_box for display but not used in transform
@@ -24,7 +24,7 @@ class FunctionalCrop(torch.nn.Module):
         return F.crop(img, self.top, self.left, self.height, self.width)
 
 
-class FunctionalRotate(torch.nn.Module):
+class TransformRotate(torch.nn.Module):
     def __init__(self, angle_degs):
         super().__init__()
         self.angle = angle_degs
@@ -45,11 +45,11 @@ TRANSFORM_REGISTRY: Dict[str, Dict[str, Any]] = {
     },
     "grayscale": {"transform": T.Grayscale, "parser": lambda attrs: {}},
     "rotate": {
-        "transform": FunctionalRotate,
+        "transform": TransformRotate,
         "parser": lambda attrs: {"angle_degs": attrs["angle_degs"]},
     },
     "crop": {
-        "transform": FunctionalCrop,
+        "transform": TransformCrop,
         "parser": lambda attrs: {
             "x_min_px": attrs["x_min_px"],
             "y_min_px": attrs["y_min_px"],
