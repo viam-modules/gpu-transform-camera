@@ -1,19 +1,21 @@
-import pytest
-
-import sys
 import os
-from viam.media.video import ViamImage
+import sys
+
+import pytest
 from PIL import Image
+from viam.media.video import ViamImage
 
 # Add the project root to Python path so we can import from src
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+import io
+
+import matplotlib.pyplot as plt
+from viam.media.utils.pil import pil_to_viam_image
+from viam.media.video import CameraMimeType
+
 from src.transform_pipeline import GPUTransformPipeline
 from src.utils.gpu_utils import viam_to_tensor
-from viam.media.utils.pil import pil_to_viam_image
-import io
-from viam.media.video import CameraMimeType
-import matplotlib.pyplot as plt
 
 
 # unit tests

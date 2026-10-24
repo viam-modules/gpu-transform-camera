@@ -1,12 +1,13 @@
+import io
+
 import torch
-from viam.media.video import ViamImage, CameraMimeType
-from viam.logging import getLogger
 import torchvision.transforms as T
 from PIL import Image
-import io
+from viam.logging import getLogger
 
 # from torchvision.io import decode_jpeg, decode_png, encode_jpeg, encode_png
 from viam.media.utils.pil import pil_to_viam_image
+from viam.media.video import CameraMimeType, ViamImage
 
 logger = getLogger(__name__)
 

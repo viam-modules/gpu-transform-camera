@@ -1,10 +1,12 @@
-from src.utils.gpu_utils import get_device, viam_to_tensor, tensor_to_viam
+from typing import Any, Dict, List, Optional
+
 import torch
-from viam.media.video import ViamImage, CameraMimeType
-from typing import List, Dict, Any, Optional
 import torchvision.transforms as T
 import torchvision.transforms.functional as F
 from viam.logging import getLogger
+from viam.media.video import CameraMimeType, ViamImage
+
+from src.utils.gpu_utils import get_device, tensor_to_viam, viam_to_tensor
 
 logger = getLogger(__name__)
 

@@ -4,24 +4,25 @@ from typing import (
     Dict,
     List,
     Mapping,
+    NamedTuple,
     Optional,
     Sequence,
     Tuple,
     cast,
-    NamedTuple,
 )
 
-from viam.components.camera import Camera, IntrinsicParameters, DistortionParameters
+from google.protobuf.json_format import MessageToDict
+from viam.components.camera import Camera, DistortionParameters, IntrinsicParameters
+from viam.logging import getLogger
 from viam.media.video import NamedImage, ViamImage
+from viam.module.types import Reconfigurable
 from viam.proto.app.robot import ComponentConfig
 from viam.proto.common import ResourceName, ResponseMetadata
-from viam.resource.base import ResourceBase
 from viam.proto.component.camera import GetPropertiesResponse
+from viam.resource.base import ResourceBase
 from viam.resource.types import Model, ModelFamily
+
 from src.transform_pipeline import GPUTransformPipeline
-from viam.logging import getLogger
-from viam.module.types import Reconfigurable
-from google.protobuf.json_format import MessageToDict
 
 logger = getLogger(__name__)
 

@@ -2,11 +2,12 @@ from typing import Dict
 
 import pytest
 import pytest_asyncio
+from fake_camera import FakeCamera
 from google.protobuf.struct_pb2 import Struct
 from viam.proto.app.robot import ComponentConfig
 from viam.services.vision import Vision
+
 from src.models.gpu_transform import GPUTransformCamera
-from fake_camera import FakeCamera
 
 # to test without viam server camera
 CAMERA_NAME = "fake-camera"
