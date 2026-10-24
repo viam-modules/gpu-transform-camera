@@ -67,20 +67,11 @@ Example:
 from src.transform_pipeline import GPUTransformPipeline
 
 config = [
-    {
-        "type": "resize",
-        "attributes": {
-            "width_px": 224,
-            "height_px": 224
-        }
-    },
+    {"type": "resize", "attributes": {"width_px": 224, "height_px": 224}},
     {
         "type": "normalize",
-        "attributes": {
-            "mean": [0.485, 0.456, 0.406],
-            "std": [0.229, 0.224, 0.225]
-        }
-    }
+        "attributes": {"mean": [0.485, 0.456, 0.406], "std": [0.229, 0.224, 0.225]},
+    },
 ]
 
 pipeline = GPUTransformPipeline(config)
